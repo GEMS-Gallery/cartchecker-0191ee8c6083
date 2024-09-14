@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const shoppingList = document.getElementById('shopping-list');
     const addItemForm = document.getElementById('add-item-form');
     const newItemInput = document.getElementById('new-item');
+    const gridViewBtn = document.getElementById('grid-view-btn');
+    const listViewBtn = document.getElementById('list-view-btn');
 
     async function renderCategories() {
         const categories = await backend.getCategories();
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             li.className = `shopping-item ${item.completed ? 'completed' : ''}`;
             li.innerHTML = `
                 <span><span class="emoji">${item.emoji}</span>${item.description}</span>
-                <div>
+                <div class="actions">
                     <button class="toggle-btn" data-id="${item.id}">
                         <i class="fas ${item.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
                     </button>
@@ -46,6 +48,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             shoppingList.appendChild(li);
         });
     }
+
+    function setView(view) {
+        if (view === 'grid') {
+            shoppingList.classList.remove('list-view');
+            shoppingList.classList.add('grid-view');
+            gridViewBtn.classList.add('active');
+            listViewBtn.classList.remove('active');
+        } else {
+            shoppingList.classList.remove('grid-view');
+            shoppingList.classList.add('list-view');
+            listViewBtn.classList.add('active');
+            gridViewBtn.classList.remove('active');
+        }
+    }
+
+    gridViewBtn.addEventListener('click', () => setView('grid'));
+    listViewBtn.addEventListener('click', () => setView('list'));
 
     categoriesContainer.addEventListener('click', async (e) => {
         if (e.target.classList.contains('category-item')) {
@@ -83,4 +102,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await renderCategories();
     await renderShoppingList();
+    setView('grid'); // Set default view
 });

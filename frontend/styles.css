@@ -75,6 +75,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    color: var(--text-color);
 }
 
 .category-item:hover {
@@ -119,21 +120,56 @@ button:hover {
     background-color: #3a7bc8;
 }
 
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.view-toggle button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.view-toggle button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 #shopping-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
+}
+
+#shopping-list.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+#shopping-list.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .shopping-item {
     background-color: white;
     border: 1px solid var(--border-color);
     padding: 15px;
-    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+}
+
+.grid-view .shopping-item {
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .shopping-item:hover {
@@ -151,11 +187,17 @@ button:hover {
 .shopping-item span {
     display: flex;
     align-items: center;
+    color: var(--text-color);
 }
 
 .shopping-item .emoji {
     margin-right: 10px;
     font-size: 1.2em;
+}
+
+.shopping-item .actions {
+    display: flex;
+    gap: 5px;
 }
 
 .shopping-item button {
@@ -179,5 +221,9 @@ button:hover {
 @media (max-width: 768px) {
     .category {
         flex: 1 1 100%;
+    }
+    
+    #shopping-list.grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }

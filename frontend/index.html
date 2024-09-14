@@ -22,8 +22,14 @@
                 </form>
             </section>
             <section id="shopping-list-container">
-                <h2>Your Shopping List</h2>
-                <ul id="shopping-list"></ul>
+                <div class="list-header">
+                    <h2>Your Shopping List</h2>
+                    <div class="view-toggle">
+                        <button id="grid-view-btn" class="active"><i class="fas fa-th"></i> Grid</button>
+                        <button id="list-view-btn"><i class="fas fa-list"></i> List</button>
+                    </div>
+                </div>
+                <ul id="shopping-list" class="grid-view"></ul>
             </section>
         </main>
     </div>
