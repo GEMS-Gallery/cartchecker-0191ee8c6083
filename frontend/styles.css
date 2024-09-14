@@ -47,10 +47,17 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
 }
 
 .category-item:hover {
     background-color: #ced4da;
+}
+
+.category-item .emoji {
+    margin-right: 5px;
+    font-size: 1.2em;
 }
 
 #add-item-form {
@@ -104,6 +111,13 @@ button:hover {
 .shopping-item span {
     flex-grow: 1;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.shopping-item .emoji {
+    margin-right: 5px;
+    font-size: 1.2em;
 }
 
 .shopping-item button {

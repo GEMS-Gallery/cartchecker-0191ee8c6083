@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             categoryDiv.innerHTML = `
                 <h2>${category.name}</h2>
                 <div class="category-items">
-                    ${category.items.map(item => `
-                        <button class="category-item" data-category="${category.name}">${item}</button>
+                    ${category.items.map(([item, emoji]) => `
+                        <button class="category-item" data-category="${category.name}" data-emoji="${emoji}">
+                            <span class="emoji">${emoji}</span>${item}
+                        </button>
                     `).join('')}
                 </div>
             `;
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const li = document.createElement('li');
             li.className = `shopping-item ${item.completed ? 'completed' : ''}`;
             li.innerHTML = `
-                <span>${item.description} (${item.category})</span>
+                <span><span class="emoji">${item.emoji}</span>${item.description} (${item.category})</span>
                 <button class="toggle-btn" data-id="${item.id}">
                     <i class="fas ${item.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
                 </button>
@@ -45,9 +47,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     categoriesContainer.addEventListener('click', async (e) => {
         if (e.target.classList.contains('category-item')) {
-            const description = e.target.textContent;
+            const description = e.target.textContent.trim();
             const category = e.target.dataset.category;
-            await backend.addItem(description, category);
+            const emoji = e.target.dataset.emoji;
+            await backend.addItem(description, category, emoji);
             await renderShoppingList();
         }
     });
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         const description = newItemInput.value.trim();
         if (description) {
-            await backend.addItem(description, 'Custom');
+            await backend.addItem(description, 'Custom', '🔹');
             newItemInput.value = '';
             await renderShoppingList();
         }

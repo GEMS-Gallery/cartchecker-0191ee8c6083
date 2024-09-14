@@ -12,26 +12,46 @@ actor {
     description: Text;
     completed: Bool;
     category: Text;
+    emoji: Text;
   };
 
   public type Category = {
     name: Text;
-    items: [Text];
+    items: [(Text, Text)]; // (item, emoji)
   };
 
   stable var shoppingItems : [ShoppingItem] = [];
   stable var nextId : Nat = 0;
 
   let categories : [Category] = [
-    { name = "Produce"; items = ["Lettuce", "Tomato", "Cucumber", "Carrot", "Spinach"] },
-    { name = "Bakery"; items = ["Bread", "Muffins", "Bagels", "Croissants", "Donuts"] }
+    { name = "Produce"; items = [
+      ("Lettuce", "🥬"), ("Tomato", "🍅"), ("Cucumber", "🥒"), 
+      ("Carrot", "🥕"), ("Spinach", "🍃"), ("Apple", "🍎"), 
+      ("Banana", "🍌"), ("Orange", "🍊")
+    ] },
+    { name = "Bakery"; items = [
+      ("Bread", "🍞"), ("Muffins", "🧁"), ("Bagels", "🥯"), 
+      ("Croissants", "🥐"), ("Donuts", "🍩"), ("Cake", "🎂")
+    ] },
+    { name = "Dairy"; items = [
+      ("Milk", "🥛"), ("Cheese", "🧀"), ("Yogurt", "🥣"), 
+      ("Butter", "🧈"), ("Eggs", "🥚")
+    ] },
+    { name = "Meat"; items = [
+      ("Chicken", "🍗"), ("Beef", "🥩"), ("Fish", "🐟"), 
+      ("Pork", "🥓"), ("Sausage", "🌭")
+    ] },
+    { name = "Beverages"; items = [
+      ("Water", "💧"), ("Coffee", "☕"), ("Tea", "🍵"), 
+      ("Juice", "🧃"), ("Soda", "🥤")
+    ] }
   ];
 
   public query func getCategories() : async [Category] {
     categories
   };
 
-  public func addItem(description : Text, category : Text) : async Nat {
+  public func addItem(description : Text, category : Text, emoji : Text) : async Nat {
     let id = nextId;
     nextId += 1;
     let newItem : ShoppingItem = {
@@ -39,6 +59,7 @@ actor {
       description = description;
       completed = false;
       category = category;
+      emoji = emoji;
     };
     shoppingItems := Array.append(shoppingItems, [newItem]);
     id
@@ -56,6 +77,7 @@ actor {
           description = item.description;
           completed = completed;
           category = item.category;
+          emoji = item.emoji;
         };
       };
       item
