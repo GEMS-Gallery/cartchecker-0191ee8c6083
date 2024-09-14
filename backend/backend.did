@@ -1,12 +1,19 @@
 type ShoppingItem = 
  record {
+   category: text;
    completed: bool;
    description: text;
    id: nat;
  };
+type Category = 
+ record {
+   items: vec text;
+   name: text;
+ };
 service : {
-  addItem: (text) -> (nat);
+  addItem: (text, text) -> (nat);
   deleteItem: (nat) -> (bool);
+  getCategories: () -> (vec Category) query;
   getItems: () -> (vec ShoppingItem) query;
   updateItem: (nat, bool) -> (bool);
 }

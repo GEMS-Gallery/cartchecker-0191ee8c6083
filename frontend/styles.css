@@ -22,6 +22,37 @@ h1 {
     text-align: center;
 }
 
+#categories {
+    margin-bottom: 20px;
+}
+
+.category {
+    margin-bottom: 15px;
+}
+
+.category h2 {
+    margin-bottom: 10px;
+}
+
+.category-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item {
+    background-color: #e9ecef;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category-item:hover {
+    background-color: #ced4da;
+}
+
 #add-item-form {
     display: flex;
     margin-bottom: 20px;
