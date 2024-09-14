@@ -33,13 +33,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             const li = document.createElement('li');
             li.className = `shopping-item ${item.completed ? 'completed' : ''}`;
             li.innerHTML = `
-                <span><span class="emoji">${item.emoji}</span>${item.description} (${item.category})</span>
-                <button class="toggle-btn" data-id="${item.id}">
-                    <i class="fas ${item.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
-                </button>
-                <button class="delete-btn" data-id="${item.id}">
-                    <i class="fas fa-trash"></i>
-                </button>
+                <span><span class="emoji">${item.emoji}</span>${item.description}</span>
+                <div>
+                    <button class="toggle-btn" data-id="${item.id}">
+                        <i class="fas ${item.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
+                    </button>
+                    <button class="delete-btn" data-id="${item.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
             `;
             shoppingList.appendChild(li);
         });

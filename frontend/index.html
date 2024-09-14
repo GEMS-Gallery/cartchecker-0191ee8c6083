@@ -5,17 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping List App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Shopping List</h1>
-        <div id="categories"></div>
-        <form id="add-item-form">
-            <input type="text" id="new-item" placeholder="Add a custom item" required>
-            <button type="submit"><i class="fas fa-plus"></i> Add Custom Item</button>
-        </form>
-        <ul id="shopping-list"></ul>
+        <header>
+            <h1>🛒 Shopping List</h1>
+        </header>
+        <main>
+            <section id="categories"></section>
+            <section id="custom-item">
+                <form id="add-item-form">
+                    <input type="text" id="new-item" placeholder="Add a custom item" required>
+                    <button type="submit"><i class="fas fa-plus"></i> Add Item</button>
+                </form>
+            </section>
+            <section id="shopping-list-container">
+                <h2>Your Shopping List</h2>
+                <ul id="shopping-list"></ul>
+            </section>
+        </main>
     </div>
     <script type="module" src="index.js"></script>
 </body>
