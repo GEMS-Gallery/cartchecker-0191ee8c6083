@@ -127,13 +127,13 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.view-toggle button {
+#view-toggle-btn {
     background-color: var(--background-color);
     color: var(--text-color);
     border: 1px solid var(--border-color);
 }
 
-.view-toggle button.active {
+#view-toggle-btn:hover {
     background-color: var(--primary-color);
     color: white;
 }

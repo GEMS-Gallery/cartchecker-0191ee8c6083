@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const shoppingList = document.getElementById('shopping-list');
     const addItemForm = document.getElementById('add-item-form');
     const newItemInput = document.getElementById('new-item');
-    const gridViewBtn = document.getElementById('grid-view-btn');
-    const listViewBtn = document.getElementById('list-view-btn');
+    const viewToggleBtn = document.getElementById('view-toggle-btn');
+
+    let isGridView = true;
 
     async function renderCategories() {
         const categories = await backend.getCategories();
@@ -38,10 +39,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <span><span class="emoji">${item.emoji}</span>${item.description}</span>
                 <div class="actions">
                     <button class="toggle-btn" data-id="${item.id}">
-                        <i class="fas ${item.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
+                        <i class="fas ${item.completed ? 'fa-check-square' : 'fa-square'}"></i>
                     </button>
                     <button class="delete-btn" data-id="${item.id}">
-                        <i class="fas fa-trash"></i>
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
             `;
@@ -49,22 +50,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    function setView(view) {
-        if (view === 'grid') {
+    function toggleView() {
+        isGridView = !isGridView;
+        if (isGridView) {
             shoppingList.classList.remove('list-view');
             shoppingList.classList.add('grid-view');
-            gridViewBtn.classList.add('active');
-            listViewBtn.classList.remove('active');
+            viewToggleBtn.innerHTML = '<i class="fas fa-list"></i> List View';
         } else {
             shoppingList.classList.remove('grid-view');
             shoppingList.classList.add('list-view');
-            listViewBtn.classList.add('active');
-            gridViewBtn.classList.remove('active');
+            viewToggleBtn.innerHTML = '<i class="fas fa-th"></i> Grid View';
         }
     }
 
-    gridViewBtn.addEventListener('click', () => setView('grid'));
-    listViewBtn.addEventListener('click', () => setView('list'));
+    viewToggleBtn.addEventListener('click', toggleView);
 
     categoriesContainer.addEventListener('click', async (e) => {
         if (e.target.classList.contains('category-item')) {
@@ -102,5 +101,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await renderCategories();
     await renderShoppingList();
-    setView('grid'); // Set default view
 });
