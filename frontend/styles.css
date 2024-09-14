@@ -211,10 +211,6 @@ button:hover {
 }
 
 .shopping-item button:hover {
-    color: var(--primary-color);
-}
-
-.shopping-item .delete-btn:hover {
     color: #e74c3c;
 }
 

@@ -38,9 +38,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             li.innerHTML = `
                 <span><span class="emoji">${item.emoji}</span>${item.description}</span>
                 <div class="actions">
-                    <button class="toggle-btn" data-id="${item.id}">
-                        <i class="fas ${item.completed ? 'fa-check-square' : 'fa-square'}"></i>
-                    </button>
                     <button class="delete-btn" data-id="${item.id}">
                         <i class="fas fa-trash-alt"></i>
                     </button>
@@ -86,13 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     shoppingList.addEventListener('click', async (e) => {
-        if (e.target.closest('.toggle-btn')) {
-            const id = parseInt(e.target.closest('.toggle-btn').dataset.id);
-            const item = e.target.closest('.shopping-item');
-            const completed = !item.classList.contains('completed');
-            await backend.updateItem(id, completed);
-            await renderShoppingList();
-        } else if (e.target.closest('.delete-btn')) {
+        if (e.target.closest('.delete-btn')) {
             const id = parseInt(e.target.closest('.delete-btn').dataset.id);
             await backend.deleteItem(id);
             await renderShoppingList();
