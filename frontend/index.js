@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const li = document.createElement('li');
             li.className = `shopping-item ${item.completed ? 'completed' : ''}`;
             li.innerHTML = `
-                <span><span class="emoji">${item.emoji}</span>${item.description}</span>
+                <span>${item.emoji} ${item.description}</span>
                 <div class="actions">
                     <button class="delete-btn" data-id="${item.id}">
                         <i class="fas fa-trash-alt"></i>
